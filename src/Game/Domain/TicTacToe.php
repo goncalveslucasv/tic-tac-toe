@@ -24,6 +24,8 @@ class TicTacToe extends AgregateRoot
 
     private GameId $gameId;
 
+    private Board $board;
+
     public function __construct(GameId $id, User $userOne, User $userTwo)
     {
         $this->userOne = $userOne->sign(self::X);
