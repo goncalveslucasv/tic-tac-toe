@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\User\Application\Controller\Console;
 use App\User\Application\Command\DeleteUserCommand;
 use App\User\Application\Query\FindUserByIdQuery;
+use App\User\Domain\Error\UserNotFoundException;
+use App\User\Domain\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

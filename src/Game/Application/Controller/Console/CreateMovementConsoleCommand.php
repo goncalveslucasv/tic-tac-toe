@@ -43,10 +43,8 @@ class CreateMovementConsoleCommand extends Command
 
         try {
             $command = new CreateMovementCommand((int) $userId, (int) $row, (int) $column, (int) $gameId);
-            $response = $this->bus->dispatch($command);
 
-            /** @var TicTacToe $result */
-            $result = $response->last(HandledStamp::class)->getResult();
+            $this->bus->dispatch($command);
 
             $output->writeln("Movement done");
 

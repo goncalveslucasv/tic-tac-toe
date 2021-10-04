@@ -55,7 +55,7 @@ class CreateUserConsoleCommand extends Command
             $output->writeln("User created ID:". $result->getId());
 
             return 1;
-        } catch (\Exception $exception) {
+        } catch (\Exception $exception ) {
             $output->writeln($exception->getMessage());
             return 0;
         }

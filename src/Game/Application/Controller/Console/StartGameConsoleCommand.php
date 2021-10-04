@@ -40,10 +40,8 @@ class StartGameConsoleCommand extends Command
 
         try {
             $command = new StartGameCommand((int) $userOneId, (int) $userTwoId, 1);
-            $response = $this->bus->dispatch($command);
 
-            /** @var TicTacToe $result */
-            $result = $response->last(HandledStamp::class)->getResult();
+            $this->bus->dispatch($command);
 
             $output->writeln("Game was created");
 
