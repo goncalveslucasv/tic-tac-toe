@@ -72,7 +72,10 @@ class Board
         ];
 
         array_walk($winnerMovements, function($field) use ($sign, &$isWinner){
-            if($this->field[$field[0][0]][$field[0][1]] === $sign && $this->field[$field[1][0]][$field[1][1]] === $sign && $this->field[$field[2][0]][$field[2][1]] === $sign){
+            if($this->field[$field[0][0]][$field[0][1]] === $sign &&
+                $this->field[$field[1][0]][$field[1][1]] === $sign &&
+                $this->field[$field[2][0]][$field[2][1]] === $sign)
+            {
                 $isWinner = true;
             }
         });
