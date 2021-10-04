@@ -42,6 +42,11 @@ class TicTacToe extends AgregateRoot
         return $this->board->field();
     }
 
+    public function getId(): int
+    {
+        return $this->gameId->getId();
+    }
+
     /**
      * @throws BoxAlreadyBusyException
      * @throws TiedGameException|InvalidUserException|InvalidMovementException
@@ -62,16 +67,9 @@ class TicTacToe extends AgregateRoot
         }
     }
 
-    public function getId(): int
-    {
-        return $this->gameId->getId();
-    }
-
     private function assertThatIsAnAllowedUser(Movement $movement)
     {
-        $user = $movement->getUser();
-
-        if($user->getId() !== $this->userOne->getId() && $user->getId() !== $this->userTwo->getId())
+        if(!$movement->isFrom($this->userOne) && !$movement->isFrom($this->userTwo))
         {
             throw new InvalidUserException();
         }

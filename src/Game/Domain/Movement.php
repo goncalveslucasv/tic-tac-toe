@@ -46,6 +46,11 @@ class Movement
         return $this->getUserSign();
     }
 
+    public function isFrom(User $user): bool
+    {
+        return $this->user->getId() === $user->getId();
+    }
+
     public function assertThatIsTheSameUser(?Movement $movement = null)
     {
         if(!$movement){

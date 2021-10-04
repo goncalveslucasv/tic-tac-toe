@@ -54,11 +54,6 @@ class Board
         return $movement;
     }
 
-    public function getSign(Movement $movement)
-    {
-        return $this->field[$movement->getColumn()][$movement->getRow()];
-    }
-
     public function isThereATie(): bool
     {
         $emptyBox = [];
