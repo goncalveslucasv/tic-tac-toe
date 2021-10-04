@@ -4,6 +4,7 @@ namespace App\User\Application\Handler;
 
 use App\User\Application\Command\CreateUserCommand;
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -18,7 +19,8 @@ class CreateUserHandler implements MessageHandlerInterface
 
     public function __invoke(CreateUserCommand $message): User
     {
-        $user = new User($message->getId());
+        $userId = new UserId($message->getId());
+        $user = new User($userId);
 
         return $this->userRepository->save($user);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Domain;
+namespace App\Game\Domain\Error;
 
 class InvalidTurnException extends \Exception
 {

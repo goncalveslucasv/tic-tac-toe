@@ -6,6 +6,7 @@ namespace App\Tests\User\Application\Handler;
 use App\User\Application\Command\CreateUserCommand;
 use App\User\Application\Handler\CreateUserHandler;
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use App\User\Infrastructure\Repository\InMemoryUserRepository;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
 
@@ -21,7 +22,7 @@ class CreateUserHandlerTest extends PHPUnit_TestCase
 
         $user = $handler($command);
 
-        $this->assertEquals(new User(6), $repository->findUserById(6));
-        $this->assertEquals(new User(6), $user);
+        $this->assertEquals(new User(new UserId(6)), $repository->findUserById(6));
+        $this->assertEquals(new User(new UserId(6)), $user);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Tests\User\Application\Controller\Console;
 
 use App\User\Application\Controller\Console\CreateUserConsoleCommand;
-use App\User\Domain\UserAlreadyExistsException;
+use App\User\Domain\Error\UserAlreadyExistsException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 

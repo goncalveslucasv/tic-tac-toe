@@ -3,14 +3,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Game\Domain;
 
-use App\Game\Domain\BoxAlreadyBusyException;
+use App\Game\Domain\Error\BoxAlreadyBusyException;
 use App\Game\Domain\GameId;
-use App\Game\Domain\InvalidTurnException;
-use App\Game\Domain\InvalidUserException;
+use App\Game\Domain\Error\InvalidTurnException;
+use App\Game\Domain\Error\InvalidUserException;
 use App\Game\Domain\Movement;
 use App\Game\Domain\TicTacToe;
-use App\Game\Domain\TiedGameException;
+use App\Game\Domain\Error\TiedGameException;
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
 
 class GameTest extends PHPUnit_TestCase
@@ -21,8 +22,8 @@ class GameTest extends PHPUnit_TestCase
 
     protected function setUp(): void
     {
-        $this->userOne = User::create(1);
-        $this->userTwo = User::create(2);
+        $this->userOne = new User(new UserId(1));
+        $this->userTwo = new User(new UserId(2));
         $gameId = new GameId(1);
 
         $this->game = new TicTacToe($gameId, $this->userOne, $this->userTwo);
@@ -222,7 +223,7 @@ class GameTest extends PHPUnit_TestCase
     public function it_should_not_create_a_movement_a_user_not_invited_to_the_game(){
         $this->expectException(InvalidUserException::class);
 
-        $this->game->play(new Movement(new User(99), 0, 0));
+        $this->game->play(new Movement(new User(new UserId(99)), 0, 0));
     }
 
 }

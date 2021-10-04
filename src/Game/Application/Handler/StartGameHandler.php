@@ -6,7 +6,7 @@ use App\Game\Application\Command\StartGameCommand;
 use App\Game\Domain\GameId;
 use App\Game\Domain\GameRepository;
 use App\Game\Domain\TicTacToe;
-use App\User\Domain\UserNotFoundException;
+use App\User\Domain\Error\UserNotFoundException;
 use App\User\Domain\UserRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

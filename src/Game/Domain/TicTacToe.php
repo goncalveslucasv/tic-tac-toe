@@ -5,6 +5,10 @@ namespace App\Game\Domain;
 
 use App\Common\AgregateRoot;
 use App\Game\Application\Event\SomeoneWonEvent;
+use App\Game\Domain\Error\BoxAlreadyBusyException;
+use App\Game\Domain\Error\InvalidTurnException;
+use App\Game\Domain\Error\InvalidUserException;
+use App\Game\Domain\Error\TiedGameException;
 use App\User\Domain\User;
 
 class TicTacToe extends AgregateRoot

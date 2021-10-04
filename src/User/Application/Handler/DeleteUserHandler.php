@@ -3,7 +3,7 @@
 namespace App\User\Application\Handler;
 
 use App\User\Application\Command\DeleteUserCommand;
-use App\User\Domain\UserNotFoundException;
+use App\User\Domain\Error\UserNotFoundException;
 use App\User\Domain\UserRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

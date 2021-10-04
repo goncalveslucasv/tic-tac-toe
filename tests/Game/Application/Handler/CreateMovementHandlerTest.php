@@ -9,9 +9,10 @@ use App\Game\Domain\GameId;
 use App\Game\Domain\GameRepository;
 use App\Game\Domain\TicTacToe;
 use App\Game\Infrastructure\Repository\InMemoryGameRepository;
-use App\Game\Domain\GameNotFoundException;
+use App\Game\Domain\Error\GameNotFoundException;
 use App\User\Domain\User;
-use App\User\Domain\UserNotFoundException;
+use App\User\Domain\UserId;
+use App\User\Domain\Error\UserNotFoundException;
 use App\User\Domain\UserRepository;
 use App\User\Infrastructure\Repository\InMemoryUserRepository;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
@@ -50,8 +51,8 @@ class CreateMovementHandlerTest extends PHPUnit_TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->userOne = User::create(self::USER_ID_ONE);
-        $this->userTwo = User::create(self::USER_ID_TWO);
+        $this->userOne = new User(new UserId(self::USER_ID_ONE));
+        $this->userTwo = new User(new UserId(self::USER_ID_TWO));
         $gameId = new GameId(self::GAME_ID);
 
         $this->game = new TicTacToe($gameId, $this->userOne, $this->userTwo);

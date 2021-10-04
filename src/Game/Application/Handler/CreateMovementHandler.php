@@ -3,14 +3,14 @@
 namespace App\Game\Application\Handler;
 
 use App\Game\Application\Command\CreateMovementCommand;
-use App\Game\Domain\BoxAlreadyBusyException;
-use App\Game\Domain\GameNotFoundException;
+use App\Game\Domain\Error\BoxAlreadyBusyException;
+use App\Game\Domain\Error\GameNotFoundException;
 use App\Game\Domain\GameRepository;
-use App\Game\Domain\InvalidUserException;
+use App\Game\Domain\Error\InvalidUserException;
 use App\Game\Domain\Movement;
 use App\Game\Domain\TicTacToe;
-use App\Game\Domain\TiedGameException;
-use App\User\Domain\UserNotFoundException;
+use App\Game\Domain\Error\TiedGameException;
+use App\User\Domain\Error\UserNotFoundException;
 use App\User\Domain\UserRepository;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

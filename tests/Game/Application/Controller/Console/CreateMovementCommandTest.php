@@ -10,6 +10,7 @@ use App\Game\Domain\Movement;
 use App\Game\Domain\TicTacToe;
 use App\Game\Infrastructure\Repository\InMemoryGameRepository;
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
 use App\User\Infrastructure\Repository\InMemoryUserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -29,8 +30,8 @@ class CreateMovementCommandTest extends KernelTestCase
         self::bootKernel();
 
         $this->stubContainer = static::getContainer();
-        $this->userOne = (new User(0))->sign("X");
-        $this->userTwo = (new User(1))->sign("O");
+        $this->userOne = (new User(new UserId(0)))->sign(TicTacToe::X);
+        $this->userTwo = (new User(new UserId(1)))->sign(TicTacToe::O);
         $this->stubContainer->set(UserRepository::class, new InMemoryUserRepository([$this->userOne, $this->userTwo]));
     }
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Domain;
+namespace App\User\Domain\Error;
 
 class UserAlreadyExistsException extends \Exception
 {

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Game\Domain;
 
+use App\Game\Domain\Error\InvalidTurnException;
 use App\User\Domain\User;
 
 class Movement

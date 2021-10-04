@@ -8,6 +8,7 @@ use App\Game\Domain\GameId;
 use App\Game\Domain\GameRepository;
 use App\Game\Domain\TicTacToe;
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 
 class InMemoryGameRepository implements GameRepository
 {
@@ -15,7 +16,7 @@ class InMemoryGameRepository implements GameRepository
 
     public function __construct(?TicTacToe $game = null)
     {
-        $gameNew = new TicTacToe(new GameId(1), new User(1), new User(2));
+        $gameNew = new TicTacToe(new GameId(1), new User(new UserId(1)), new User( new UserId(2)));
         $this->game = $game ?? $gameNew;
     }
 

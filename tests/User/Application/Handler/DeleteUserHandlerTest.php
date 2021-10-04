@@ -5,7 +5,7 @@ namespace App\Tests\User\Application\Handler;
 
 use App\User\Application\Command\DeleteUserCommand;
 use App\User\Application\Handler\DeleteUserHandler;
-use App\User\Domain\UserNotFoundException;
+use App\User\Domain\Error\UserNotFoundException;
 use App\User\Infrastructure\Repository\InMemoryUserRepository;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
 

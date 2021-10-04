@@ -7,7 +7,7 @@ namespace App\User\Application\Controller\Console;
 use App\User\Application\Command\CreateUserCommand;
 use App\User\Application\Query\FindUserByIdQuery;
 use App\User\Domain\User;
-use App\User\Domain\UserAlreadyExistsException;
+use App\User\Domain\Error\UserAlreadyExistsException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

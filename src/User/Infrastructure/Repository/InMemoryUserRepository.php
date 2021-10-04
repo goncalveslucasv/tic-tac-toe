@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\User\Infrastructure\Repository;
 
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
 
 class InMemoryUserRepository implements UserRepository
@@ -16,12 +17,12 @@ class InMemoryUserRepository implements UserRepository
     public function __construct(array $users = null)
     {
         $this->users = $users ?? [
-            0 => new User(0),
-            1 => new User(1),
-            2 => new User(2),
-            3 => new User(3),
-            4 => new User(4),
-            5 => new User(5),
+            0 => new User(new UserId(0)),
+            1 => new User(new UserId(1)),
+            2 => new User(new UserId(2)),
+            3 => new User(new UserId(3)),
+            4 => new User(new UserId(4)),
+            5 => new User(new UserId(5)),
         ];
     }
 
