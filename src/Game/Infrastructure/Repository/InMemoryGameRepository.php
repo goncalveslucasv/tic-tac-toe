@@ -11,7 +11,7 @@ use App\User\Domain\User;
 
 class InMemoryGameRepository implements GameRepository
 {
-    private $game;
+    private TicTacToe $game;
 
     public function __construct(?TicTacToe $game = null)
     {

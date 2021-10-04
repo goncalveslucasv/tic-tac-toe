@@ -7,5 +7,5 @@ interface GameRepository
 {
     public function findGameById(int $id): ?TicTacToe;
 
-    public function save(TicTacToe $user): TicTacToe;
+    public function save(TicTacToe $ticTacToe): TicTacToe;
 }

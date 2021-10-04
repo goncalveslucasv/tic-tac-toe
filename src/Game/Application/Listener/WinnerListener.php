@@ -7,6 +7,9 @@ use App\Game\Domain\GameOver;
 
 class WinnerListener
 {
+    /**
+     * @throws GameOver
+     */
     public function onGameWinner(SomeoneWonEvent $event): void
     {
         $user = $event->getUser();

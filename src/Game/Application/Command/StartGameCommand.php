@@ -4,18 +4,11 @@ namespace App\Game\Application\Command;
 
 class StartGameCommand
 {
-    /**
-     * @var int
-     */
-    private $userOneId;
-    /**
-     * @var int
-     */
-    private $userTwoId;
-    /**
-     * @var int
-     */
-    private $id;
+    private int $userOneId;
+
+    private int $userTwoId;
+
+    private int $id;
 
     public function __construct(int $userOneId, int $userTwoId, int $id)
     {
@@ -24,25 +17,16 @@ class StartGameCommand
         $this->id = $id;
     }
 
-    /**
-     * @return int
-     */
     public function getUserOneId(): int
     {
         return $this->userOneId;
     }
 
-    /**
-     * @return int
-     */
     public function getUserTwoId(): int
     {
         return $this->userTwoId;
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;

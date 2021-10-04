@@ -15,10 +15,7 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class StartGameConsoleCommand extends Command
 {
-    /**
-     * @var MessageBusInterface
-     */
-    private $bus;
+    private MessageBusInterface $bus;
 
     public function __construct(MessageBusInterface $bus)
     {

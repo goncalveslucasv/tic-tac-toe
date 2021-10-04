@@ -9,16 +9,16 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class DeleteUserHandler implements MessageHandlerInterface
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @throws UserNotFoundException
+     */
     public function __invoke(DeleteUserCommand $message)
     {
         $user = $this->userRepository->findUserById($message->getId());

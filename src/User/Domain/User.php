@@ -5,40 +5,33 @@ namespace App\User\Domain;
 
 class User
 {
-    /**
-     * @var int
-     */
-    private $id;
+    private int $id;
 
-    /**
-     * @var string
-     */
-    private $sign;
+    private string $sign;
 
     public function __construct(int $id)
     {
         $this->id = $id;
     }
 
-    public static function create(int $userId){
+    public static function create(int $userId): User
+    {
         return new self($userId);
     }
 
-    public function sign(string $sign){
+    public function sign(string $sign): User
+    {
         $this->sign = $sign;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getSign()
+    public function getSign(): string
     {
         return $this->sign;
     }

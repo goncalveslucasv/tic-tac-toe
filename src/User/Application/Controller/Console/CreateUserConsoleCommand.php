@@ -17,10 +17,7 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class CreateUserConsoleCommand extends Command
 {
-    /**
-     * @var MessageBusInterface
-     */
-    private $bus;
+    private MessageBusInterface $bus;
 
     public function __construct(MessageBusInterface $bus)
     {
@@ -36,7 +33,7 @@ class CreateUserConsoleCommand extends Command
         ;
     }
 
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         $userId = $input->getArgument('userId');
 

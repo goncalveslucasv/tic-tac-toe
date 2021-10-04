@@ -2,7 +2,6 @@
 
 namespace App\Game\Application\Handler;
 
-use App\Game\Application\Command\CreateEvent;
 use App\Game\Application\Command\StartGameCommand;
 use App\Game\Domain\GameId;
 use App\Game\Domain\GameRepository;
@@ -16,11 +15,11 @@ class StartGameHandler implements MessageHandlerInterface
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
     /**
      * @var GameRepository
      */
-    private $gameRepository;
+    private GameRepository $gameRepository;
 
     public function __construct(UserRepository $userRepository, GameRepository $gameRepository)
     {
@@ -28,7 +27,10 @@ class StartGameHandler implements MessageHandlerInterface
         $this->gameRepository = $gameRepository;
     }
 
-    public function __invoke(StartGameCommand $message)
+    /**
+     * @throws UserNotFoundException
+     */
+    public function __invoke(StartGameCommand $message): TicTacToe
     {
         $userOne = $this->userRepository->findUserById($message->getUserOneId());
         $userTwo = $this->userRepository->findUserById($message->getUserTwoId());

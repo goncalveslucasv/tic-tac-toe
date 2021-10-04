@@ -9,17 +9,14 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class CreateUserHandler implements MessageHandlerInterface
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(CreateUserCommand $message)
+    public function __invoke(CreateUserCommand $message): User
     {
         $user = new User($message->getId());
 

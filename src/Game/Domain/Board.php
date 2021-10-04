@@ -4,9 +4,6 @@ namespace App\Game\Domain;
 
 class Board
 {
-    /**
-     * @var string[][]
-     */
     private array $field;
 
     const winningVerticalMovements = [
@@ -35,7 +32,7 @@ class Board
         ];
     }
 
-    public function field()
+    public function field(): array
     {
         return $this->field;
     }
@@ -50,7 +47,8 @@ class Board
         return $this->field[$movement->getColumn()][$movement->getRow()];
     }
 
-    public function isThereATie(){
+    public function isThereATie(): bool
+    {
         $emptyBox = [];
         array_walk($this->field, function (array $row) use (&$emptyBox){
             array_walk($row, function ($column) use (&$emptyBox){
@@ -63,7 +61,7 @@ class Board
         return count($emptyBox) === 0;
     }
 
-    public function isThereAWinner(Movement $movement)
+    public function isThereAWinner(Movement $movement): bool
     {
         $sign = $movement->getUserSign();
 

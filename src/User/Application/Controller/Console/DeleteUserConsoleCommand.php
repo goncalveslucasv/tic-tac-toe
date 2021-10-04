@@ -33,7 +33,7 @@ class DeleteUserConsoleCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $userId = $input->getArgument('userId');
 
@@ -54,6 +54,7 @@ class DeleteUserConsoleCommand extends Command
             return 1;
         } catch (\Exception $exception) {
             $output->writeln($exception->getMessage());
+            return 0;
         }
 
     }

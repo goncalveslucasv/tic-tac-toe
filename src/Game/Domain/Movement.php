@@ -7,18 +7,11 @@ use App\User\Domain\User;
 
 class Movement
 {
-    /**
-     * @var User
-     */
-    private $user;
-    /**
-     * @var int
-     */
-    private $row;
-    /**
-     * @var int
-     */
-    private $column;
+    private User $user;
+
+    private int $row;
+
+    private int $column;
 
     public function __construct(User $user, int $row, int $column)
     {
@@ -27,28 +20,22 @@ class Movement
         $this->column = $column;
     }
 
-    /**
-     * @return int
-     */
     public function getRow(): int
     {
         return $this->row;
     }
 
-    /**
-     * @return int
-     */
     public function getColumn(): int
     {
         return $this->column;
     }
 
-    public function getUserSign()
+    public function getUserSign(): string
     {
         return $this->user->getSign();
     }
 
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }

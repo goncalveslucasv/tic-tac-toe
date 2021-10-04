@@ -12,23 +12,13 @@ class TicTacToe extends AgregateRoot
     const X = 'X';
     const O = 'O';
 
-    /**
-     * @var User
-     */
-    private $userOne;
-    /**
-     * @var User
-     */
-    private $userTwo;
+    private User $userOne;
 
-    /**
-     * @var Movement
-     */
-    private $lastMovement;
-    /**
-     * @var GameId
-     */
-    private $gameId;
+    private User $userTwo;
+
+    private Movement $lastMovement;
+
+    private GameId $gameId;
 
     public function __construct(GameId $id, User $userOne, User $userTwo)
     {
@@ -40,14 +30,14 @@ class TicTacToe extends AgregateRoot
         $this->gameId = $id;
     }
 
-    public function field()
+    public function field(): array
     {
         return $this->board->field();
     }
 
     /**
      * @throws BoxAlreadyBusyException
-     * @throws InvalidTurnException|TiedGameException
+     * @throws TiedGameException|InvalidUserException|InvalidTurnException
      */
     public function play(Movement $movement)
     {
@@ -78,13 +68,13 @@ class TicTacToe extends AgregateRoot
         }
     }
 
+    /**
+     * @throws InvalidTurnException
+     */
     private function assertThatIsADifferentPlayer(Movement $movement){
         $this->lastMovement->assertThatIsADifferentPlayer($movement);
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->gameId->getId();

@@ -9,16 +9,13 @@ class SomeoneWonEvent extends Event
 {
     public const NAME = 'game.winner';
 
-    protected $user;
+    protected User $user;
 
     public function __construct(User $user)
     {
         $this->user = $user;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
