@@ -3,7 +3,6 @@
 namespace App\Game\Domain;
 
 use App\Game\Domain\Error\BoxAlreadyBusyException;
-use function PHPUnit\Framework\isEmpty;
 
 class Board
 {
@@ -78,15 +77,15 @@ class Board
             ...self::winningDiagonalMovements
         ];
 
-        array_walk($winnerMovements, function($field) use ($sign, &$isWinner){
+        array_walk($winnerMovements, function($field) use ($sign, &$isThereAWinner){
             if($this->field[$field[0][0]][$field[0][1]] === $sign &&
                 $this->field[$field[1][0]][$field[1][1]] === $sign &&
                 $this->field[$field[2][0]][$field[2][1]] === $sign)
             {
-                $isWinner = true;
+                $isThereAWinner = true;
             }
         });
 
-        return $isWinner;
+        return $isThereAWinner;
     }
 }
