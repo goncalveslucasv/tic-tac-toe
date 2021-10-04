@@ -48,7 +48,7 @@ class TicTacToe extends AgregateRoot
      */
     public function play(Movement $movement)
     {
-        $movement->assertThatIsADifferentPlayer($this->lastMovement);
+        $movement->assertThatIsTheSameUser($this->lastMovement);
         $this->assertThatIsAnAllowedPlayer($movement);
 
         $this->lastMovement = $movement;

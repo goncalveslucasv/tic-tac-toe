@@ -46,7 +46,7 @@ class Movement
         return $this->getUserSign();
     }
 
-    public function assertThatIsADifferentPlayer(?Movement $movement = null)
+    public function assertThatIsTheSameUser(?Movement $movement = null)
     {
         if(!$movement){
             return;
