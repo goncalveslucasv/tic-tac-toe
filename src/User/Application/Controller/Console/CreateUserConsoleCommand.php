@@ -7,6 +7,7 @@ namespace App\User\Application\Controller\Console;
 use App\User\Application\Command\CreateUserCommand;
 use App\User\Application\Query\FindUserByIdQuery;
 use App\User\Domain\User;
+use App\User\Domain\UserAlreadyExistsException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,7 +45,7 @@ class CreateUserConsoleCommand extends Command
 
 
         if (isset($user)) {
-            throw new \Exception('User already exists');
+            throw new UserAlreadyExistsException('User already exists');
         }
 
         try {
@@ -54,12 +55,12 @@ class CreateUserConsoleCommand extends Command
             /** @var User $result */
             $result = $response->last(HandledStamp::class)->getResult();
 
-
             $output->writeln("User created ID:". $result->getId());
 
             return 1;
         } catch (\Exception $exception) {
             $output->writeln($exception->getMessage());
+            return 0;
         }
 
     }

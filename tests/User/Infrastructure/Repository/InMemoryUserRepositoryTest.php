@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\User\Infrastructure\Repository;
+namespace App\Tests\User\Infrastructure\Repository;
 
 use App\User\Domain\User;
 use App\User\Infrastructure\Repository\InMemoryUserRepository;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
-use Tests\TestCase;
 
 class InMemoryUserRepositoryTest extends PHPUnit_TestCase
 {
     /** @test */
-    public function fist()
+    public function it_should_return_a_stored_users()
     {
         $repository = new InMemoryUserRepository();
 
@@ -28,7 +27,7 @@ class InMemoryUserRepositoryTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function second()
+    public function it_should_return_a_specific_user_when_is_queried()
     {
         $repository = new InMemoryUserRepository();
 
@@ -38,7 +37,7 @@ class InMemoryUserRepositoryTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function three()
+    public function it_should_not_return_a_specific_user_when_the_query_is_wrong()
     {
         $repository = new InMemoryUserRepository();
 
@@ -48,7 +47,7 @@ class InMemoryUserRepositoryTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function four()
+    public function it_should_save_a_new_user()
     {
         $aNewUser = new User(6);
         $repository = new InMemoryUserRepository();
@@ -61,7 +60,7 @@ class InMemoryUserRepositoryTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function five()
+    public function it_should_remove_an_existent_user()
     {
         $aNewUser = new User(6);
         $repository = new InMemoryUserRepository();

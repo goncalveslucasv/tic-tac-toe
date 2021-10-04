@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\User\Application\Controller\Console;
+namespace App\Tests\Game\Application\Controller\Console;
 
 use App\Game\Application\Controller\Console\CreateMovementConsoleCommand;
 use App\Game\Domain\GameId;
@@ -14,7 +14,6 @@ use App\User\Domain\UserRepository;
 use App\User\Infrastructure\Repository\InMemoryUserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\TestCase;
 
 class CreateMovementCommandTest extends KernelTestCase
 {
@@ -30,7 +29,7 @@ class CreateMovementCommandTest extends KernelTestCase
     }
 
     /** @test */
-    public function first()
+    public function it_should_create_a_movement_from_a_line_command_interface()
     {
         /** @var CreateMovementConsoleCommand $command */
         $command = $this->stubContainer->get(CreateMovementConsoleCommand::class);
@@ -48,7 +47,7 @@ class CreateMovementCommandTest extends KernelTestCase
 
 
     /** @test */
-    public function second()
+    public function it_should_do_the_last_movement_before_winning()
     {
         /** @var CreateMovementConsoleCommand $command */
         $command = $this->stubContainer->get(CreateMovementConsoleCommand::class);
@@ -80,7 +79,7 @@ class CreateMovementCommandTest extends KernelTestCase
 
 
     /** @test */
-    public function three()
+    public function it_should_do_the_last_movement_before_tying()
     {
         /** @var CreateMovementConsoleCommand $command */
         $command = $this->stubContainer->get(CreateMovementConsoleCommand::class);

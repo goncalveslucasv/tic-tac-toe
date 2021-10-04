@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\Domain\Game;
+namespace App\Tests\Game\Domain;
 
 use App\Game\Domain\BoxAlreadyBusyException;
 use App\Game\Domain\GameId;
@@ -12,7 +12,6 @@ use App\Game\Domain\TicTacToe;
 use App\Game\Domain\TiedGameException;
 use App\User\Domain\User;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
-use Tests\TestCase;
 
 class GameTest extends PHPUnit_TestCase
 {
@@ -30,7 +29,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function first()
+    public function it_should_have_an_empty_board()
     {
         $field = $this->game->field();
 
@@ -44,7 +43,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function second()
+    public function it_should_allow_a_new_movement_in_a_new_game()
     {
         $movement = new Movement($this->userOne, 0, 0);
         $this->game->play($movement);
@@ -61,7 +60,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function third()
+    public function it_should_allow_two_users_play()
     {
         $movement = new Movement($this->userOne, 0, 0);
         $this->game->play($movement);
@@ -81,7 +80,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function four()
+    public function it_should_not_allow_two_marks_in_the_same_box()
     {
         $this->expectException(BoxAlreadyBusyException::class);
 
@@ -93,7 +92,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function five()
+    public function it_should_win_a_user_with_a_horizontal_winner_mark()
     {
         $movement = new Movement($this->userOne, 0, 0);
         $this->game->play($movement);
@@ -124,7 +123,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function six()
+    public function it_should_win_a_user_with_a_diagonal_winner_mark()
     {
         $movement = new Movement($this->userOne, 0, 0);
         $this->game->play($movement);
@@ -154,7 +153,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function seven()
+    public function it_should_win_a_user_with_a_vertical_winner_mark()
     {
         $movement = new Movement($this->userOne, 0, 0);
         $this->game->play($movement);
@@ -184,7 +183,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function eight(){
+    public function it_should_not_a_user_play_twice(){
         $this->expectException(InvalidTurnException::class);
         $movement = new Movement($this->userOne, 0, 0);
         $this->game->play($movement);
@@ -195,7 +194,7 @@ class GameTest extends PHPUnit_TestCase
 
 
     /** @test */
-    public function nine(){
+    public function it_should_throw_a_error_when_the_game_ends_without_a_winner(){
         $this->expectException(TiedGameException::class);
 
         $this->game->play(new Movement($this->userOne, 0, 0));
@@ -220,7 +219,7 @@ class GameTest extends PHPUnit_TestCase
     }
 
     /** @test */
-    public function ten(){
+    public function it_should_not_create_a_movement_a_user_not_invited_to_the_game(){
         $this->expectException(InvalidUserException::class);
 
         $this->game->play(new Movement(new User(99), 0, 0));

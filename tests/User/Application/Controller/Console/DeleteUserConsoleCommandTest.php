@@ -1,14 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\User\Application\Controller\Console;
+namespace App\Tests\User\Application\Controller\Console;
 
-use App\User\Application\Controller\Console\CreateUserConsoleCommand;
 use App\User\Application\Controller\Console\DeleteUserConsoleCommand;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\TestCase;
 
 class DeleteUserConsoleCommandTest extends KernelTestCase
 {
@@ -24,7 +22,7 @@ class DeleteUserConsoleCommandTest extends KernelTestCase
     }
 
     /** @test */
-    public function first()
+    public function it_should_delete_a_user_when_a_valid_user_is_passed()
     {
         /** @var DeleteUserConsoleCommand $command */
         $command = $this->stubContainer->get(DeleteUserConsoleCommand::class);
@@ -39,7 +37,7 @@ class DeleteUserConsoleCommandTest extends KernelTestCase
 
 
     /** @test */
-    public function second()
+    public function it_should_not_delete_a_user_when_an_invalid_user_is_passed()
     {
         $this->expectException(Exception::class);
         /** @var DeleteUserConsoleCommand $command */

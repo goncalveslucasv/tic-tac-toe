@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\User\Application\Controller\Console;
+namespace App\Tests\User\Application\Controller\Console;
 
 use App\User\Application\Controller\Console\CreateUserConsoleCommand;
-use Exception;
+use App\User\Domain\UserAlreadyExistsException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\TestCase;
 
 class CreateUserConsoleCommandTest extends KernelTestCase
 {
@@ -23,7 +22,7 @@ class CreateUserConsoleCommandTest extends KernelTestCase
     }
 
     /** @test */
-    public function first()
+    public function it_should_create_a_user_from_command_line_with_a_right_id()
     {
         /** @var CreateUserConsoleCommand $command */
         $command = $this->stubContainer->get(CreateUserConsoleCommand::class);
@@ -38,9 +37,9 @@ class CreateUserConsoleCommandTest extends KernelTestCase
 
 
     /** @test */
-    public function second()
+    public function it_should_not_create_a_user_when_the_user_already_exists()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(UserAlreadyExistsException::class);
         /** @var CreateUserConsoleCommand $command */
         $command = $this->stubContainer->get(CreateUserConsoleCommand::class);
 
