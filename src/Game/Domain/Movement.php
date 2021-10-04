@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Game\Domain;
 
-use App\Game\Domain\Error\InvalidTurnException;
+use App\Game\Domain\Error\InvalidMovementException;
 use App\User\Domain\User;
 
 class Movement
@@ -46,10 +46,14 @@ class Movement
         return $this->getUserSign();
     }
 
-    public function assertThatIsADifferentPlayer(Movement $movement)
+    public function assertThatIsADifferentPlayer(?Movement $movement = null)
     {
+        if(!$movement){
+            return;
+        }
+
         if($this->user === $movement->getUser()){
-            throw new InvalidTurnException();
+            throw new InvalidMovementException();
         }
     }
 

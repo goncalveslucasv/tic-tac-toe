@@ -2,6 +2,9 @@
 
 namespace App\Game\Domain;
 
+use App\Game\Domain\Error\BoxAlreadyBusyException;
+use function PHPUnit\Framework\isEmpty;
+
 class Board
 {
     private array $field;
@@ -37,8 +40,15 @@ class Board
         return $this->field;
     }
 
+    /**
+     * @throws BoxAlreadyBusyException
+     */
     public function drawMovement(Movement $movement)
     {
+        if($this->field[$movement->getColumn()][$movement->getRow()] !== TicTacToe::VOID){
+            throw new BoxAlreadyBusyException();
+        }
+
         $this->field[$movement->getColumn()][$movement->getRow()] = $movement->getUserSign();
     }
 

@@ -5,7 +5,7 @@ namespace App\Tests\Game\Domain;
 
 use App\Game\Domain\Error\BoxAlreadyBusyException;
 use App\Game\Domain\GameId;
-use App\Game\Domain\Error\InvalidTurnException;
+use App\Game\Domain\Error\InvalidMovementException;
 use App\Game\Domain\Error\InvalidUserException;
 use App\Game\Domain\Movement;
 use App\Game\Domain\TicTacToe;
@@ -185,7 +185,7 @@ class GameTest extends PHPUnit_TestCase
 
     /** @test */
     public function it_should_not_a_user_play_twice(){
-        $this->expectException(InvalidTurnException::class);
+        $this->expectException(InvalidMovementException::class);
         $movement = new Movement($this->userOne, 0, 0);
         $this->game->play($movement);
 

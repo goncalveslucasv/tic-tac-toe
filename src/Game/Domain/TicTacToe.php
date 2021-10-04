@@ -6,7 +6,7 @@ namespace App\Game\Domain;
 use App\Common\AgregateRoot;
 use App\Game\Application\Event\SomeoneWonEvent;
 use App\Game\Domain\Error\BoxAlreadyBusyException;
-use App\Game\Domain\Error\InvalidTurnException;
+use App\Game\Domain\Error\InvalidMovementException;
 use App\Game\Domain\Error\InvalidUserException;
 use App\Game\Domain\Error\TiedGameException;
 use App\User\Domain\User;
@@ -15,12 +15,13 @@ class TicTacToe extends AgregateRoot
 {
     const X = 'X';
     const O = 'O';
+    const VOID = '';
 
     private User $userOne;
 
     private User $userTwo;
 
-    private Movement $lastMovement;
+    private ?Movement $lastMovement = null;
 
     private GameId $gameId;
 
@@ -43,14 +44,11 @@ class TicTacToe extends AgregateRoot
 
     /**
      * @throws BoxAlreadyBusyException
-     * @throws TiedGameException|InvalidUserException|InvalidTurnException
+     * @throws TiedGameException|InvalidUserException|InvalidMovementException
      */
     public function play(Movement $movement)
     {
-        if (isset($this->lastMovement)) {
-            $this->assertThatTheBoxIsFree($movement);
-            $this->assertThatIsADifferentPlayer($movement);
-        }
+        $movement->assertThatIsADifferentPlayer($this->lastMovement);
         $this->assertThatIsAnAllowedPlayer($movement);
 
         $this->lastMovement = $movement;
@@ -63,22 +61,6 @@ class TicTacToe extends AgregateRoot
         if($this->board->isThereATie()){
             throw new TiedGameException();
         }
-    }
-
-    private function assertThatTheBoxIsFree(Movement $movement)
-    {
-        $box = $this->board->getSign($movement);
-
-        if($box === self::X || $box === self::O){
-            throw new BoxAlreadyBusyException();
-        }
-    }
-
-    /**
-     * @throws InvalidTurnException
-     */
-    private function assertThatIsADifferentPlayer(Movement $movement){
-        $this->lastMovement->assertThatIsADifferentPlayer($movement);
     }
 
     public function getId(): int
