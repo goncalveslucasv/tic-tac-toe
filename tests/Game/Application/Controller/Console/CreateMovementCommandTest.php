@@ -14,11 +14,14 @@ use App\User\Domain\UserRepository;
 use App\User\Infrastructure\Repository\InMemoryUserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class CreateMovementCommandTest extends KernelTestCase
 {
 
-    private $stubContainer;
+    private ContainerInterface $stubContainer;
+    private User $userOne;
+    private User $userTwo;
 
     protected function setUp(): void
     {
@@ -26,6 +29,9 @@ class CreateMovementCommandTest extends KernelTestCase
         self::bootKernel();
 
         $this->stubContainer = static::getContainer();
+        $this->userOne = (new User(0))->sign("X");
+        $this->userTwo = (new User(1))->sign("O");
+        $this->stubContainer->set(UserRepository::class, new InMemoryUserRepository([$this->userOne, $this->userTwo]));
     }
 
     /** @test */
@@ -52,18 +58,15 @@ class CreateMovementCommandTest extends KernelTestCase
         /** @var CreateMovementConsoleCommand $command */
         $command = $this->stubContainer->get(CreateMovementConsoleCommand::class);
 
-        $userOne = new User(0);
-        $userTwo = new User(1);
-        $game = new TicTacToe(new GameId(1), $userOne, $userTwo);
+        $game = new TicTacToe(new GameId(1), $this->userOne, $this->userTwo);
 
-        $game->play(new Movement($userOne, 0, 0));
-        $game->play(new Movement($userTwo, 1, 1));
-        $game->play(new Movement($userOne, 1, 0));
-        $game->play( new Movement($userTwo, 1, 2));
+        $game->play(new Movement($this->userOne, 0, 0));
+        $game->play(new Movement($this->userTwo, 1, 1));
+        $game->play(new Movement($this->userOne, 1, 0));
+        $game->play( new Movement($this->userTwo, 1, 2));
         $repo =  new InMemoryGameRepository($game);
 
         $this->stubContainer->set(GameRepository::class, $repo);
-        $this->stubContainer->set(UserRepository::class, new InMemoryUserRepository([$userOne, $userTwo]));
 
         $commandTester = new CommandTester($command);
         $commandTester->execute([
@@ -84,22 +87,19 @@ class CreateMovementCommandTest extends KernelTestCase
         /** @var CreateMovementConsoleCommand $command */
         $command = $this->stubContainer->get(CreateMovementConsoleCommand::class);
 
-        $userOne = new User(0);
-        $userTwo = new User(1);
-        $game = new TicTacToe(new GameId(1), $userOne, $userTwo);
+        $game = new TicTacToe(new GameId(1), $this->userOne, $this->userTwo);
 
-        $game->play(new Movement($userOne, 0, 0));
-        $game->play(new Movement($userTwo, 0, 1));
-        $game->play(new Movement($userOne, 0, 2));
-        $game->play(new Movement($userTwo, 1, 1));
-        $game->play(new Movement($userOne, 1, 0));
-        $game->play(new Movement($userTwo, 1, 2));
-        $game->play(new Movement($userOne, 2, 1));
-        $game->play(new Movement($userTwo, 2, 0));
-        $repo =  new InMemoryGameRepository($game);
+        $game->play(new Movement($this->userOne, 0, 0));
+        $game->play(new Movement($this->userTwo, 0, 1));
+        $game->play(new Movement($this->userOne, 0, 2));
+        $game->play(new Movement($this->userTwo, 1, 1));
+        $game->play(new Movement($this->userOne, 1, 0));
+        $game->play(new Movement($this->userTwo, 1, 2));
+        $game->play(new Movement($this->userOne, 2, 1));
+        $game->play(new Movement($this->userTwo, 2, 0));
 
-        $this->stubContainer->set(GameRepository::class, $repo);
-        $this->stubContainer->set(UserRepository::class, new InMemoryUserRepository([$userOne, $userTwo]));
+        $gameRepository =  new InMemoryGameRepository($game);
+        $this->stubContainer->set(GameRepository::class, $gameRepository);
 
         $commandTester = new CommandTester($command);
         $commandTester->execute([

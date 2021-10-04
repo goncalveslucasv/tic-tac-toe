@@ -31,7 +31,7 @@ class User
         return $this->id;
     }
 
-    public function getSign(): string
+    public function getSign()
     {
         return $this->sign;
     }

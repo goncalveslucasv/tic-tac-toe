@@ -50,6 +50,7 @@ class CreateMovementHandler implements MessageHandlerInterface
         if(empty($game)) throw new GameNotFoundException();
 
         $movement = new Movement($user, $message->getRow(), $message->getColumn());
+
         $game->play($movement);
 
         $game->events() && $this->eventDispatcher->dispatch(...$game->events());

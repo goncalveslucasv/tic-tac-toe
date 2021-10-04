@@ -61,7 +61,7 @@ class Board
         return count($emptyBox) === 0;
     }
 
-    public function isThereAWinner(Movement $movement): bool
+    public function isThereAWinner(Movement $movement)
     {
         $sign = $movement->getUserSign();
 

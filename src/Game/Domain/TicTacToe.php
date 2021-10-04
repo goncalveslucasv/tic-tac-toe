@@ -47,6 +47,8 @@ class TicTacToe extends AgregateRoot
         }
         $this->assertThatIsAnAllowedPlayer($movement);
 
+
+
         $this->lastMovement = $movement;
         $this->board->drawMovement($movement);
 
