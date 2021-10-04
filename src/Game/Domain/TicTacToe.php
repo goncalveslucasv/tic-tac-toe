@@ -49,7 +49,7 @@ class TicTacToe extends AgregateRoot
     public function play(Movement $movement)
     {
         $movement->assertThatIsTheSameUser($this->lastMovement);
-        $this->assertThatIsAnAllowedPlayer($movement);
+        $this->assertThatIsAnAllowedUser($movement);
 
         $this->lastMovement = $this->board->drawMovement($movement);
 
@@ -67,7 +67,7 @@ class TicTacToe extends AgregateRoot
         return $this->gameId->getId();
     }
 
-    private function assertThatIsAnAllowedPlayer(Movement $movement)
+    private function assertThatIsAnAllowedUser(Movement $movement)
     {
         $user = $movement->getUser();
 
