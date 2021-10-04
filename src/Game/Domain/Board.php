@@ -43,13 +43,15 @@ class Board
     /**
      * @throws BoxAlreadyBusyException
      */
-    public function drawMovement(Movement $movement)
+    public function drawMovement(Movement $movement): Movement
     {
         if($this->field[$movement->getColumn()][$movement->getRow()] !== TicTacToe::VOID){
             throw new BoxAlreadyBusyException();
         }
 
         $this->field[$movement->getColumn()][$movement->getRow()] = $movement->getUserSign();
+
+        return $movement;
     }
 
     public function getSign(Movement $movement)

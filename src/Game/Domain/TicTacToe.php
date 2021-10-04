@@ -51,8 +51,7 @@ class TicTacToe extends AgregateRoot
         $movement->assertThatIsTheSameUser($this->lastMovement);
         $this->assertThatIsAnAllowedPlayer($movement);
 
-        $this->lastMovement = $movement;
-        $this->board->drawMovement($movement);
+        $this->lastMovement = $this->board->drawMovement($movement);
 
         if($this->board->isThereAWinner($movement)){
             $this->apply(new SomeoneWonEvent($movement->getUser()));
@@ -76,6 +75,5 @@ class TicTacToe extends AgregateRoot
         {
             throw new InvalidUserException();
         }
-
     }
 }
