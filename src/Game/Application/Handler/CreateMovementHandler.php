@@ -53,8 +53,11 @@ class CreateMovementHandler implements MessageHandlerInterface
 
         $game->play($movement);
 
+        $this->gameRepository->save($game);
+
         $game->events() && $this->eventDispatcher->dispatch(...$game->events());
 
-        return $this->gameRepository->save($game);
+        return $game;
+
     }
 }
